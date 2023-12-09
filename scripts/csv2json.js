@@ -6,7 +6,7 @@ import { Buffer } from 'buffer';
 // eslint-disable-next-line no-undef
 globalThis.Buffer = Buffer;
 import Bunzip from 'seek-bzip';
-import {readFileSync} from 'node:fs'
+import { readFileSync } from 'node:fs';
 /*
 This regular expression is used to match fields in a CSV file where some fields may be enclosed in double quotes.
 > /(?:^|,) - This non-capturing group (?: ... ) matches the start of the string ^ or a comma ,. It’s used to find the beginning of a new field.
@@ -21,7 +21,7 @@ and ending with a double quote ". The (?:""[^"]*)* part allows escaped double qu
 const csvRegex = /(?:^|,)(?:"[^"]*(?:""[^"]*)*"|[^,]*)/g;
 fetchDecompressParseCSV(process.env.FILENAME);
 function fetchDecompressParseCSV(filename) {
-    const response = readFileSync(filename);
+	const response = readFileSync(filename);
 	const arrayBuffer = new Uint8Array(response);
 	const decompressed = Bunzip.decode(arrayBuffer);
 	const csvData = new TextDecoder('utf-8').decode(decompressed);

@@ -1,8 +1,14 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
+	import { pwaInfo } from 'virtual:pwa-info';
 
+	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 	export let data: LayoutData;
 </script>
+
+<svelte:head>
+	{@html webManifestLink}
+</svelte:head>
 
 <nav>
 	<ul>

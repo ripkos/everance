@@ -4,6 +4,14 @@
 	import { dbService } from '$lib';
 	import type { DbSetWrapper } from '$lib/db/db-set-wrapper';
 	import type { InvTypes } from '$lib/db/models/inv-types';
+	import { onMount } from 'svelte';
+	onMount(async () => {
+		await dbService.invTypes.init();
+	});
 </script>
 
-<a>TEST</a>
+{#await data}
+	<p>Loading...</p>
+{:then loadedData}
+	<a>TEST</a>
+{/await}
