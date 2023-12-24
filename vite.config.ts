@@ -2,7 +2,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import { defineConfig } from 'vite';
 import commonjs from 'vite-plugin-commonjs';
-const iconsPath = 'img/icons/'
+const iconsPath = 'img/icons/';
 export default defineConfig({
 	plugins: [
 		sveltekit(),
@@ -31,5 +31,5 @@ export default defineConfig({
 				]
 			}
 		})
-	]
+	],
 });
