@@ -1,9 +1,9 @@
-export type agtAgentTypes = {
+export type agtAgentTypesImport = {
 	agentTypeID: string;
 	agentType: string | null;
 };
 
-export type agtAgents = {
+export type agtAgentsImport = {
 	agentID: string;
 	divisionID: string | null;
 	corporationID: string | null;
@@ -14,7 +14,7 @@ export type agtAgents = {
 	isLocator: string | null;
 };
 
-export type agtAgentsInSpace = {
+export type agtAgentsInSpaceImport = {
 	agentID: string;
 	dungeonID: string | null;
 	solarSystemID: string | null;
@@ -22,26 +22,26 @@ export type agtAgentsInSpace = {
 	typeID: string | null;
 };
 
-export type agtResearchAgents = {
+export type agtResearchAgentsImport = {
 	agentID: string;
 	typeID: string;
 };
 
-export type certCerts = {
+export type certCertsImport = {
 	certID: string;
 	description: string | null;
 	groupID: string | null;
 	name: string | null;
 };
 
-export type certMasteries = {
+export type certMasteriesImport = {
 	typeID: string | null;
 	masteryLevel: string | null;
 	certID: string | null;
 	id: string;
 };
 
-export type certSkills = {
+export type certSkillsImport = {
 	certID: string | null;
 	skillID: string | null;
 	certLevelInt: string | null;
@@ -50,7 +50,7 @@ export type certSkills = {
 	id: string;
 };
 
-export type charFactions = {
+export type charFactionsImport = {
 	factionID: string;
 	factionName: string | null;
 	description: string | null;
@@ -65,7 +65,7 @@ export type charFactions = {
 	id: string;
 };
 
-export type chrAncestries = {
+export type chrAncestriesImport = {
 	ancestryID: string;
 	ancestryName: string | null;
 	bloodlineID: string | null;
@@ -79,7 +79,7 @@ export type chrAncestries = {
 	shortDescription: string | null;
 };
 
-export type chrAttributes = {
+export type chrAttributesImport = {
 	attributeID: string;
 	attributeName: string | null;
 	description: string | null;
@@ -88,7 +88,7 @@ export type chrAttributes = {
 	notes: string | null;
 };
 
-export type chrBloodlines = {
+export type chrBloodlinesImport = {
 	bloodlineID: string;
 	bloodlineName: string | null;
 	raceID: string | null;
@@ -108,7 +108,7 @@ export type chrBloodlines = {
 	shortFemaleDescription: string | null;
 };
 
-export type chrFactions = {
+export type chrFactionsImport = {
 	factionID: string;
 	factionName: string | null;
 	description: string | null;
@@ -122,7 +122,7 @@ export type chrFactions = {
 	iconID: string | null;
 };
 
-export type chrRaces = {
+export type chrRacesImport = {
 	raceID: string;
 	raceName: string | null;
 	description: string | null;
@@ -130,29 +130,29 @@ export type chrRaces = {
 	shortDescription: string | null;
 };
 
-export type crpActivities = {
+export type crpActivitiesImport = {
 	activityID: string;
 	activityName: string | null;
 	description: string | null;
 };
 
-export type crpNPCCorporationDivisions = {
+export type crpNPCCorporationDivisionsImport = {
 	corporationID: string;
 	divisionID: string;
 	size: string | null;
 };
 
-export type crpNPCCorporationResearchFields = {
+export type crpNPCCorporationResearchFieldsImport = {
 	skillID: string;
 	corporationID: string;
 };
 
-export type crpNPCCorporationTrades = {
+export type crpNPCCorporationTradesImport = {
 	corporationID: string;
 	typeID: string;
 };
 
-export type crpNPCCorporations = {
+export type crpNPCCorporationsImport = {
 	corporationID: string;
 	size: string | null;
 	extent: string | null;
@@ -183,20 +183,20 @@ export type crpNPCCorporations = {
 	iconID: string | null;
 };
 
-export type crpNPCDivisions = {
+export type crpNPCDivisionsImport = {
 	divisionID: string;
 	divisionName: string | null;
 	description: string | null;
 	leaderType: string | null;
 };
 
-export type dgmAttributeCategories = {
+export type dgmAttributeCategoriesImport = {
 	categoryID: string;
 	categoryName: string | null;
 	categoryDescription: string | null;
 };
 
-export type dgmAttributeTypes = {
+export type dgmAttributeTypesImport = {
 	attributeID: string;
 	attributeName: string | null;
 	description: string | null;
@@ -210,7 +210,7 @@ export type dgmAttributeTypes = {
 	categoryID: string | null;
 };
 
-export type dgmEffects = {
+export type dgmEffectsImport = {
 	effectID: string;
 	effectName: string | null;
 	effectCategory: string | null;
@@ -241,7 +241,7 @@ export type dgmEffects = {
 	modifierInfo: string | null;
 };
 
-export type dgmExpressions = {
+export type dgmExpressionsImport = {
 	expressionID: string;
 	operandID: string | null;
 	arg1: string | null;
@@ -254,20 +254,20 @@ export type dgmExpressions = {
 	expressionAttributeID: string | null;
 };
 
-export type dgmTypeAttributes = {
+export type dgmTypeAttributesImport = {
 	typeID: string;
 	attributeID: string;
 	valueInt: string | null;
 	valueFloat: string | null;
 };
 
-export type dgmTypeEffects = {
+export type dgmTypeEffectsImport = {
 	typeID: string;
 	effectID: string;
 	isDefault: string | null;
 };
 
-export type eveGraphics = {
+export type eveGraphicsImport = {
 	graphicID: string;
 	sofFactionName: string | null;
 	graphicFile: string | null;
@@ -276,26 +276,26 @@ export type eveGraphics = {
 	description: string | null;
 };
 
-export type eveIcons = {
+export type eveIconsImport = {
 	iconID: string;
 	iconFile: string | null;
 	description: string | null;
 };
 
-export type eveUnits = {
+export type eveUnitsImport = {
 	unitID: string;
 	unitName: string | null;
 	displayName: string | null;
 	description: string | null;
 };
 
-export type industryActivity = {
+export type industryActivityImport = {
 	typeID: string;
 	activityID: string;
 	time: string | null;
 };
 
-export type industryActivityMaterials = {
+export type industryActivityMaterialsImport = {
 	typeID: string | null;
 	activityID: string | null;
 	materialTypeID: string | null;
@@ -303,7 +303,7 @@ export type industryActivityMaterials = {
 	id: string;
 };
 
-export type industryActivityProbabilities = {
+export type industryActivityProbabilitiesImport = {
 	typeID: string | null;
 	activityID: string | null;
 	productTypeID: string | null;
@@ -311,7 +311,7 @@ export type industryActivityProbabilities = {
 	id: string;
 };
 
-export type industryActivityProducts = {
+export type industryActivityProductsImport = {
 	typeID: string | null;
 	activityID: string | null;
 	productTypeID: string | null;
@@ -319,7 +319,7 @@ export type industryActivityProducts = {
 	id: string;
 };
 
-export type industryActivityRaces = {
+export type industryActivityRacesImport = {
 	typeID: string | null;
 	activityID: string | null;
 	productTypeID: string | null;
@@ -327,7 +327,7 @@ export type industryActivityRaces = {
 	id: string;
 };
 
-export type industryActivitySkills = {
+export type industryActivitySkillsImport = {
 	typeID: string | null;
 	activityID: string | null;
 	skillID: string | null;
@@ -335,19 +335,19 @@ export type industryActivitySkills = {
 	id: string;
 };
 
-export type industryBlueprints = {
+export type industryBlueprintsImport = {
 	typeID: string;
 	maxProductionLimit: string | null;
 };
 
-export type invCategories = {
+export type invCategoriesImport = {
 	categoryID: string;
 	categoryName: string | null;
 	iconID: string | null;
 	published: string | null;
 };
 
-export type invContrabandTypes = {
+export type invContrabandTypesImport = {
 	factionID: string;
 	typeID: string;
 	standingLoss: string | null;
@@ -356,12 +356,12 @@ export type invContrabandTypes = {
 	attackMinSec: string | null;
 };
 
-export type invControlTowerResourcePurposes = {
+export type invControlTowerResourcePurposesImport = {
 	purpose: string;
 	purposeText: string | null;
 };
 
-export type invControlTowerResources = {
+export type invControlTowerResourcesImport = {
 	controlTowerTypeID: string;
 	resourceTypeID: string;
 	purpose: string | null;
@@ -370,14 +370,14 @@ export type invControlTowerResources = {
 	factionID: string | null;
 };
 
-export type invFlags = {
+export type invFlagsImport = {
 	flagID: string;
 	flagName: string | null;
 	flagText: string | null;
 	orderID: string | null;
 };
 
-export type invGroups = {
+export type invGroupsImport = {
 	groupID: string;
 	categoryID: string | null;
 	groupName: string | null;
@@ -389,7 +389,7 @@ export type invGroups = {
 	published: string | null;
 };
 
-export type invItems = {
+export type invItemsImport = {
 	itemID: string;
 	typeID: string;
 	ownerID: string;
@@ -398,7 +398,7 @@ export type invItems = {
 	quantity: string;
 };
 
-export type invMarketGroups = {
+export type invMarketGroupsImport = {
 	marketGroupID: string;
 	parentGroupID: string | null;
 	marketGroupName: string | null;
@@ -407,25 +407,25 @@ export type invMarketGroups = {
 	hasTypes: string | null;
 };
 
-export type invMetaGroups = {
+export type invMetaGroupsImport = {
 	metaGroupID: string;
 	metaGroupName: string | null;
 	description: string | null;
 	iconID: string | null;
 };
 
-export type invMetaTypes = {
+export type invMetaTypesImport = {
 	typeID: string;
 	parentTypeID: string | null;
 	metaGroupID: string | null;
 };
 
-export type invNames = {
+export type invNamesImport = {
 	itemID: string;
 	itemName: string;
 };
 
-export type invPositions = {
+export type invPositionsImport = {
 	itemID: string;
 	x: string;
 	y: string;
@@ -435,7 +435,7 @@ export type invPositions = {
 	roll: string | null;
 };
 
-export type invTraits = {
+export type invTraitsImport = {
 	traitID: string;
 	typeID: string | null;
 	skillID: string | null;
@@ -444,20 +444,20 @@ export type invTraits = {
 	unitID: string | null;
 };
 
-export type invTypeMaterials = {
+export type invTypeMaterialsImport = {
 	typeID: string;
 	materialTypeID: string;
 	quantity: string;
 };
 
-export type invTypeReactions = {
+export type invTypeReactionsImport = {
 	reactionTypeID: string;
 	input: string;
 	typeID: string;
 	quantity: string | null;
 };
 
-export type invTypes = {
+export type invTypesImport = {
 	typeID: string;
 	groupID: string | null;
 	typeName: string | null;
@@ -475,18 +475,18 @@ export type invTypes = {
 	graphicID: string | null;
 };
 
-export type invUniqueNames = {
+export type invUniqueNamesImport = {
 	itemID: string;
 	itemName: string;
 	groupID: string | null;
 };
 
-export type invVolumes = {
+export type invVolumesImport = {
 	typeID: string;
 	volume: string | null;
 };
 
-export type mapCelestialGraphics = {
+export type mapCelestialGraphicsImport = {
 	celestialID: string;
 	heightMap1: string | null;
 	heightMap2: string | null;
@@ -494,7 +494,7 @@ export type mapCelestialGraphics = {
 	population: string | null;
 };
 
-export type mapCelestialStatistics = {
+export type mapCelestialStatisticsImport = {
 	celestialID: string;
 	temperature: string | null;
 	spectralClass: string | null;
@@ -517,14 +517,14 @@ export type mapCelestialStatistics = {
 	mass: string | null;
 };
 
-export type mapConstellationJumps = {
+export type mapConstellationJumpsImport = {
 	fromRegionID: string | null;
 	fromConstellationID: string;
 	toConstellationID: string;
 	toRegionID: string | null;
 };
 
-export type mapConstellations = {
+export type mapConstellationsImport = {
 	regionID: string | null;
 	constellationID: string;
 	constellationName: string | null;
@@ -541,7 +541,7 @@ export type mapConstellations = {
 	radius: string | null;
 };
 
-export type mapDenormalize = {
+export type mapDenormalizeImport = {
 	itemID: string;
 	typeID: string | null;
 	groupID: string | null;
@@ -559,12 +559,12 @@ export type mapDenormalize = {
 	orbitIndex: string | null;
 };
 
-export type mapJumps = {
+export type mapJumpsImport = {
 	stargateID: string;
 	destinationID: string | null;
 };
 
-export type mapLandmarks = {
+export type mapLandmarksImport = {
 	landmarkID: string;
 	landmarkName: string | null;
 	description: string | null;
@@ -575,22 +575,22 @@ export type mapLandmarks = {
 	iconID: string | null;
 };
 
-export type mapLocationScenes = {
+export type mapLocationScenesImport = {
 	locationID: string;
 	graphicID: string | null;
 };
 
-export type mapLocationWormholeClasses = {
+export type mapLocationWormholeClassesImport = {
 	locationID: string;
 	wormholeClassID: string | null;
 };
 
-export type mapRegionJumps = {
+export type mapRegionJumpsImport = {
 	fromRegionID: string;
 	toRegionID: string;
 };
 
-export type mapRegions = {
+export type mapRegionsImport = {
 	regionID: string;
 	regionName: string | null;
 	x: string | null;
@@ -607,7 +607,7 @@ export type mapRegions = {
 	radius: string | null;
 };
 
-export type mapSolarSystemJumps = {
+export type mapSolarSystemJumpsImport = {
 	fromRegionID: string | null;
 	fromConstellationID: string | null;
 	fromSolarSystemID: string;
@@ -616,7 +616,7 @@ export type mapSolarSystemJumps = {
 	toRegionID: string | null;
 };
 
-export type mapSolarSystems = {
+export type mapSolarSystemsImport = {
 	regionID: string | null;
 	constellationID: string | null;
 	solarSystemID: string;
@@ -645,7 +645,7 @@ export type mapSolarSystems = {
 	securityClass: string | null;
 };
 
-export type mapUniverse = {
+export type mapUniverseImport = {
 	universeID: string;
 	universeName: string | null;
 	x: string | null;
@@ -660,25 +660,25 @@ export type mapUniverse = {
 	radius: string | null;
 };
 
-export type planetSchematics = {
+export type planetSchematicsImport = {
 	schematicID: string;
 	schematicName: string | null;
 	cycleTime: string | null;
 };
 
-export type planetSchematicsPinMap = {
+export type planetSchematicsPinMapImport = {
 	schematicID: string;
 	pinTypeID: string;
 };
 
-export type planetSchematicsTypeMap = {
+export type planetSchematicsTypeMapImport = {
 	schematicID: string;
 	typeID: string;
 	quantity: string | null;
 	isInput: string | null;
 };
 
-export type ramActivities = {
+export type ramActivitiesImport = {
 	activityID: string;
 	activityName: string | null;
 	iconNo: string | null;
@@ -686,7 +686,7 @@ export type ramActivities = {
 	published: string | null;
 };
 
-export type ramAssemblyLineStations = {
+export type ramAssemblyLineStationsImport = {
 	stationID: string;
 	assemblyLineTypeID: string;
 	quantity: string | null;
@@ -696,7 +696,7 @@ export type ramAssemblyLineStations = {
 	regionID: string | null;
 };
 
-export type ramAssemblyLineTypeDetailPerCategory = {
+export type ramAssemblyLineTypeDetailPerCategoryImport = {
 	assemblyLineTypeID: string;
 	categoryID: string;
 	timeMultiplier: string | null;
@@ -704,7 +704,7 @@ export type ramAssemblyLineTypeDetailPerCategory = {
 	costMultiplier: string | null;
 };
 
-export type ramAssemblyLineTypeDetailPerGroup = {
+export type ramAssemblyLineTypeDetailPerGroupImport = {
 	assemblyLineTypeID: string;
 	groupID: string;
 	timeMultiplier: string | null;
@@ -712,7 +712,7 @@ export type ramAssemblyLineTypeDetailPerGroup = {
 	costMultiplier: string | null;
 };
 
-export type ramAssemblyLineTypes = {
+export type ramAssemblyLineTypesImport = {
 	assemblyLineTypeID: string;
 	assemblyLineTypeName: string | null;
 	description: string | null;
@@ -724,42 +724,42 @@ export type ramAssemblyLineTypes = {
 	minCostPerHour: string | null;
 };
 
-export type ramInstallationTypeContents = {
+export type ramInstallationTypeContentsImport = {
 	installationTypeID: string;
 	assemblyLineTypeID: string;
 	quantity: string | null;
 };
 
-export type skinLicense = {
+export type skinLicenseImport = {
 	licenseTypeID: string;
 	duration: string | null;
 	skinID: string | null;
 };
 
-export type skinMaterials = {
+export type skinMaterialsImport = {
 	skinMaterialID: string;
 	displayNameID: string | null;
 	materialSetID: string | null;
 };
 
-export type skinShip = {
+export type skinShipImport = {
 	skinID: string | null;
 	typeID: string | null;
 	id: string;
 };
 
-export type skins = {
+export type skinsImport = {
 	skinID: string;
 	internalName: string | null;
 	skinMaterialID: string | null;
 };
 
-export type staOperationServices = {
+export type staOperationServicesImport = {
 	operationID: string;
 	serviceID: string;
 };
 
-export type staOperations = {
+export type staOperationsImport = {
 	activityID: string | null;
 	operationID: string;
 	operationName: string | null;
@@ -776,13 +776,13 @@ export type staOperations = {
 	joveStationTypeID: string | null;
 };
 
-export type staServices = {
+export type staServicesImport = {
 	serviceID: string;
 	serviceName: string | null;
 	description: string | null;
 };
 
-export type staStationTypes = {
+export type staStationTypesImport = {
 	stationTypeID: string;
 	dockEntryX: string | null;
 	dockEntryY: string | null;
@@ -796,7 +796,7 @@ export type staStationTypes = {
 	conquerable: string | null;
 };
 
-export type staStations = {
+export type staStationsImport = {
 	stationID: bigint;
 	security: string | null;
 	dockingCostPerVolume: string | null;
@@ -817,7 +817,7 @@ export type staStations = {
 	reprocessingHangarFlag: string | null;
 };
 
-export type translationTables = {
+export type translationTablesImport = {
 	sourceTable: string;
 	destinationTable: string | null;
 	translatedKey: string;
@@ -825,7 +825,7 @@ export type translationTables = {
 	tcID: string | null;
 };
 
-export type trnTranslationColumns = {
+export type trnTranslationColumnsImport = {
 	tcGroupID: string | null;
 	tcID: string;
 	tableName: string;
@@ -833,25 +833,25 @@ export type trnTranslationColumns = {
 	masterID: string | null;
 };
 
-export type trnTranslationLanguages = {
+export type trnTranslationLanguagesImport = {
 	numericLanguageID: string;
 	languageID: string | null;
 	languageName: string | null;
 };
 
-export type trnTranslations = {
+export type trnTranslationsImport = {
 	tcID: string;
 	keyID: string;
 	languageID: string;
 	text: string;
 };
 
-export type warCombatZoneSystems = {
+export type warCombatZoneSystemsImport = {
 	solarSystemID: string;
 	combatZoneID: string | null;
 };
 
-export type warCombatZones = {
+export type warCombatZonesImport = {
 	combatZoneID: string;
 	combatZoneName: string | null;
 	factionID: string | null;

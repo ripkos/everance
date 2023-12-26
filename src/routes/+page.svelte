@@ -1,4 +1,6 @@
 <script>
 </script>
 
-<button>Click</button>
+<svelte:head>
+	<title>Home | ExR</title>
+</svelte:head>

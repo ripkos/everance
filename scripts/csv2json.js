@@ -1,11 +1,22 @@
 import { decompressParseCSV } from '../src/lib/csv2json.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
 
-const inPrefix = `${process.env.PWD}/in/sde/`
+const inPrefix = `${process.env.PWD}/in/sde/`;
 const outPrefix = `${process.env.PWD}/out/sde/`;
-
-String.prototype.toNumberOrNull = (value) => (value ? Number(value) : null);
-String.prototype.toBoolean = (value) => (value && value === '1');
+Object.defineProperty(String.prototype, 'toNumberOrNull', {
+	value: function toNumberOrNull() {
+		return this ? Number(this) : null;
+	},
+	writable: true,
+	configurable: true
+});
+Object.defineProperty(String.prototype, 'toBoolean', {
+	value: function toBoolean() {
+		return this && this === '1';
+	},
+	writable: true,
+	configurable: true
+});
 
 /**
  * @typedef {Object} ParsingType
@@ -16,7 +27,7 @@ String.prototype.toBoolean = (value) => (value && value === '1');
 
 /**
  * @typedef {import('../src/lib/model/model-types').invTypes} invTypes
- * @typedef {import('../src/lib/model/model-import-types').invTypes} invTypesImport
+ * @typedef {import('../src/lib/model/model-import-types').invTypesImport} invTypesImport
  * */
 
 /**
@@ -25,7 +36,7 @@ String.prototype.toBoolean = (value) => (value && value === '1');
 const invTypes = {
 	name: 'invTypes',
 	/** @type {(v: invTypesImport) => invTypes} */
-	mapper: (v) => {
+	mapper: (v, _, __) => {
 		return {
 			typeID: Number(v.typeID),
 			groupID: v.groupID?.toNumberOrNull(),
@@ -46,10 +57,59 @@ const invTypes = {
 	}
 };
 
+/**
+ * @typedef {import('../src/lib/model/model-types').dgmTypeAttributes} dgmTypeAttributes
+ * @typedef {import('../src/lib/model/model-import-types').dgmTypeAttributesImport} dgmTypeAttributesImport
+ * */
+
+/**
+ * @type {ParsingType}
+ */
+const dgmTypeAttributes = {
+	name: 'dgmTypeAttributes',
+	/** @type {(v: dgmTypeAttributesImport) => dgmTypeAttributes} */
+	mapper: (v, _, __) => {
+		return {
+			typeID: Number(v.typeID), //pk
+			attributeID: Number(v.attributeID), //pk
+			valueInt: v.valueInt?.toNumberOrNull(),
+			valueFloat: v.valueFloat?.toNumberOrNull()
+		};
+	}
+};
+
+/**
+ * @typedef {import('../src/lib/model/model-types').invGroups} invGroups
+ * @typedef {import('../src/lib/model/model-import-types').invGroupsImport} invGroupsImport
+ * */
+
+/**
+ * @type {ParsingType}
+ */
+const invGroups = {
+	name: 'invGroups',
+	/** @type {(v: invGroupsImport) => invGroups} */
+	mapper: (v, _, __) => {
+		return {
+			groupID: Number(v.groupID), // pk
+			categoryID: v.categoryID?.toNumberOrNull(),
+			groupName: v.groupName,
+			iconID: v.iconID?.toNumberOrNull(),
+			useBasePrice: v.useBasePrice?.toBoolean(),
+			anchored: v.anchored?.toBoolean(),
+			anchorable: v.anchorable?.toBoolean(),
+			fittableNonSingleton: v.fittableNonSingleton?.toBoolean(),
+			published: v.published?.toBoolean()
+		};
+	}
+};
+
 /** @type {Array<ParsingType>} */
-[
-	invTypes
-].forEach( ({name, mapper, filter}) => {
-	const result = decompressParseCSV(new Uint8Array(readFileSync(`${inPrefix}${name}.csv.bz2`)),mapper,filter);
-	writeFileSync(`${outPrefix}${name}.json`, JSON.stringify(result))
+[invTypes, dgmTypeAttributes, invGroups].forEach(({ name, mapper, filter }) => {
+	const result = decompressParseCSV(
+		new Uint8Array(readFileSync(`${inPrefix}${name}.csv.bz2`)),
+		mapper,
+		filter
+	);
+	writeFileSync(`${outPrefix}${name}.json`, JSON.stringify(result));
 });

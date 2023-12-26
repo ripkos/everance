@@ -255,10 +255,12 @@ export type dgmExpressions = {
 };
 
 export type dgmTypeAttributes = {
-	typeID: number;
-	attributeID: number;
+	typeID: number; //pk
+	attributeID: number; //pk
 	valueInt: number | null;
 	valueFloat: number | null;
+	// nav
+	invTypes: undefined | null | invTypes;
 };
 
 export type dgmTypeEffects = {
@@ -378,7 +380,7 @@ export type invFlags = {
 };
 
 export type invGroups = {
-	groupID: number;
+	groupID: number; // pk
 	categoryID: number | null;
 	groupName: string | null;
 	iconID: number | null;
@@ -387,6 +389,8 @@ export type invGroups = {
 	anchorable: boolean | null;
 	fittableNonSingleton: boolean | null;
 	published: boolean | null;
+	// nav
+	invTypes: undefined | null | invTypes[];
 };
 
 export type invItems = {
@@ -458,7 +462,7 @@ export type invTypeReactions = {
 };
 
 export type invTypes = {
-	typeID: number;
+	typeID: number; //pk
 	groupID: number | null;
 	typeName: string | null;
 	description: string | null;
@@ -473,6 +477,9 @@ export type invTypes = {
 	iconID: number | null;
 	soundID: number | null;
 	graphicID: number | null;
+	// nav
+	invGroups: undefined | null | invGroups;
+	dgmTypeAttributes: undefined | null | dgmTypeAttributes[];
 };
 
 export type invUniqueNames = {

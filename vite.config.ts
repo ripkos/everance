@@ -11,25 +11,41 @@ export default defineConfig({
 			devOptions: {
 				enabled: true
 			},
-			includeAssets: [`${iconsPath}favicon.ico'`, `${iconsPath}apple-touch-icon.png`],
+			includeAssets: [`${iconsPath}favicon.ico'`, `${iconsPath}apple-touch-icon.webp`],
 			manifest: {
+				start_url: '/',
 				name: 'eve.rance.club',
 				short_name: 'everance',
 				description: 'eve.rance.club - web app for EVE Online developed by RanceClab',
 				theme_color: '#000000',
+				background_color: '#000000',
 				icons: [
 					{
-						src: `${iconsPath}android-chrome-192x192.png`,
+						src: `${iconsPath}android-chrome-192x192.webp`,
 						sizes: '192x192',
-						type: 'image/png'
+						type: 'image/webp',
+						purpose: 'maskable'
 					},
 					{
-						src: `${iconsPath}android-chrome-512x512.png`,
+						src: `${iconsPath}android-chrome-512x512.webp`,
 						sizes: '512x512',
-						type: 'image/png'
+						type: 'image/webp'
+					}
+				]
+			},
+			workbox: {
+				runtimeCaching: [
+					{
+						handler: 'CacheFirst',
+						urlPattern: /^https:\/\/eve\.rance\.club/,
+						options: {
+							cacheableResponse: {
+								statuses: [200]
+							}
+						}
 					}
 				]
 			}
 		})
-	],
+	]
 });

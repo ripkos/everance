@@ -23,8 +23,17 @@
 		"src/**/*.svelte",
 		"tests/**/*.js",
 		"tests/**/*.ts",
-		"tests/**/*.svelte"
-, "src/lib/csv2json.mjs"	]
+		"tests/**/*.svelte",
+		"src/lib/csv2json.mjs"
+	],
+	"exclude": [
+		"../node_modules/**",
+		"./[!ambient.d.ts]**",
+		"../src/service-worker.js",
+		"../src/service-worker.ts",
+		"../src/service-worker.d.ts",
+		"../scripts/*"
+	]
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
 	//
 	// If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes

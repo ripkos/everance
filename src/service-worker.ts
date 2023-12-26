@@ -1,14 +1,12 @@
 /// <reference types="@sveltejs/kit" />
-/*
 import { build, files, version } from '$service-worker';
 
 // Create a unique cache name for this deployment
 const CACHE = `cache-${version}`;
 
-
 const ASSETS = [
 	...build, // the app itself
-	...files  // everything in `static`
+	...files // everything in `static`
 ];
 
 self.addEventListener('install', (event) => {
@@ -80,5 +78,3 @@ self.addEventListener('fetch', (event) => {
 
 	event.respondWith(respond());
 });
-
-*/
