@@ -30,13 +30,14 @@ const powers: Map<string, number> = new Map<string, number>([
 	['5', 1024]
 ]);
 function levelToSP(level: string, modifier: number): number {
-	if (!'12345'.includes(level)) {
+	const currentLevelPower = powers.get(level);
+	const prevLevelPower = powers.get((Number(level) - 1).toFixed(0));
+	if (!prevLevelPower || !currentLevelPower) {
 		throw new Error('Only supports levels 1-5!');
 	}
-	const currentLevel = Math.round(250 * modifier * (powers.get(level) as number));
-	const prevLevel = Math.round(
-		250 * modifier * (powers.get((Number(level) - 1).toFixed(0)) as number)
-	);
+    const baseWithModifier = 250 * modifier;
+	const currentLevel = Math.round(baseWithModifier * currentLevelPower);
+	const prevLevel = Math.round(baseWithModifier * prevLevelPower);
 	return Math.round(currentLevel - prevLevel);
 }
 
