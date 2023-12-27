@@ -42,11 +42,9 @@ function mapOneToMany<K, One extends LooseObject, Many extends LooseObject>(
 		}
 	});
 }
-function sdej(url: string) {
-	return `/sde/${url}.json`;
-}
+
 async function fetchParse(url: string) {
-	const res = await fetch(sdej(url));
+	const res = await fetch(`/sde/${url}.json`);
 	return await res.json();
 }
 //#endregion
