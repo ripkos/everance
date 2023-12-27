@@ -1,12 +1,13 @@
 <script lang="ts">
-	import { MsgType, type Msg, type SPCalculatorResponseDTO } from '$lib/workers/db-worker';
-	import SharedWorker from '$lib/workers/db-worker?sharedworker';
+	import { MsgType, type Msg } from '$lib/workers/shared-db-worker/shared-db-worker';
+	import SharedWorker from '$lib/workers/shared-db-worker/shared-db-worker?sharedworker';
+	import type { SPCalculatorResponseDTO } from '$lib/workers/shared-db-worker/sp-calculator';
 	import { onMount } from 'svelte';
+	import SpSelector from './sp-selector.svelte';
 	import TabInstruction from './tab-instruction.svelte';
-	import { SPTabs } from './tabs';
 	import TabSkillQueue from './tab-skill-queue.svelte';
 	import TabSummary from './tab-summary.svelte';
-	import SpSelector from './sp-selector.svelte';
+	import { SPTabs } from './tabs';
 
 	let currentTab = SPTabs.SkillQueue;
 	let worker: SharedWorker;

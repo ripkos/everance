@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { SPCalculatorResponseDTO } from '$lib/workers/db-worker';
+	import type { SPCalculatorResponseDTO } from '$lib/workers/shared-db-worker/sp-calculator';
+
 	export let output: SPCalculatorResponseDTO | null;
 </script>
 
@@ -15,54 +16,38 @@
 				<table>
 					<thead>
 						<tr>
-                            <th>
-                                x
-                            </th>
-                            <th>
-                                Skill Name
-                            </th>
-                            <th>
-                                LVL
-                            </th>
-                            <th>
-                                SP amount
-                            </th>
-                            <th>
-                                PA
-                            </th>
-                            <th>
-                                SA
-                            </th>
-                            <th>
-                                TT
-                            </th>
-                        </tr>
+							<th> x </th>
+							<th> Skill Name </th>
+							<th> LVL </th>
+							<th> SP amount </th>
+							<th> PA </th>
+							<th> SA </th>
+							<th> TT </th>
+						</tr>
 					</thead>
 					<tbody>
 						{#each output.skills as skill}
-						<tr>
-                            <td>
-                                {skill.order+1}
-                            </td>
-                            <td>
-                                {skill.name}
-                            </td>
-                            <td>
-                                {skill.level}
-                            </td>
-                            <td>
-                                {skill.sp}
-                            </td>
-                            <td>
-                                {skill.primary}
-                            </td>
-                            <td>
-                                {skill.primary}
-                            </td>
-                            <td>
-                                TODO
-                            </td>
-                        </tr>
+							<tr>
+								<td>
+									{skill.order + 1}
+								</td>
+								<td>
+									{skill.name}
+								</td>
+								<td>
+									{skill.level}
+								</td>
+								<td>
+									{skill.sp}
+								</td>
+								<td>
+									{skill.primary}
+								</td>
+								<td>
+									{skill.primary}
+								</td>
+								<td> TODO </td>
+							</tr>
 						{/each}
 					</tbody>
 				</table>

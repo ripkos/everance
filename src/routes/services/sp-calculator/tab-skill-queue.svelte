@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MsgType, type Msg } from '$lib/workers/db-worker';
+	import { MsgType, type Msg } from '$lib/workers/shared-db-worker/shared-db-worker';
 
 	const placeholder = `Energy Grid Upgrades 5
 Electronics Upgrades 4

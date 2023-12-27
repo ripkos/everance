@@ -1,12 +1,8 @@
-/// <reference lib="WebWorker" />
-declare const self: SharedWorkerGlobalScope;
-import type { invTypes, dgmTypeAttributes, invGroups } from '$lib/model/model-types';
-interface LooseObject {
-	[key: string]: unknown;
-}
-export type Msg = {
-	type: MsgType;
-	params: unknown;
+import type { invTypes } from '$lib/model/model-types';
+
+export type SPCalculatorResponseDTO = {
+	skills: SkillData[];
+	sum: number;
 };
 
 export type SkillData = {
@@ -18,61 +14,6 @@ export type SkillData = {
 	sp: number | null | undefined;
 	level: string | null | undefined;
 };
-export type SPCalculatorResponseDTO = {
-	skills: SkillData[];
-	sum: number;
-};
-
-export enum MsgType {
-	SPCalculator
-}
-
-function mapOneToMany<K, One extends LooseObject, Many extends LooseObject>(
-	oneNavigationProperty: string,
-	oneArray: One[],
-	manyNavigationProperty: string,
-	manyArray: Many[],
-	manyPK: string
-) {
-	const manyMap = new Map<K, Many>();
-	manyArray.forEach((many) => {
-		manyMap.set(many[manyPK] as K, many);
-	});
-	oneArray.forEach((oneObj) => {
-		const key = oneObj[manyPK] as K;
-		const manyObj = manyMap.get(key);
-		if (manyObj) {
-			let arr: Array<One> | null | undefined = manyObj[oneNavigationProperty] as Array<One>;
-			if (!arr) {
-				arr = [];
-			}
-			arr.push(oneObj);
-			(manyObj as LooseObject)[oneNavigationProperty] = arr;
-			(oneObj as LooseObject)[manyNavigationProperty] = manyObj;
-		}
-	});
-}
-
-let invTypesArr: Array<invTypes> = [];
-let dgmTypeAttributesArr: Array<dgmTypeAttributes> = [];
-let invGroupsArr: Array<invGroups> = [];
-function sdej(url: string) {
-	return `/sde/${url}.json`;
-}
-async function fetchParse(url: string) {
-	const res = await fetch(sdej(url));
-	return await res.json();
-}
-let isInit = false;
-let isError = false;
-async function init() {
-	//fetch
-	invTypesArr = await fetchParse('invTypes');
-	dgmTypeAttributesArr = await fetchParse('dgmTypeAttributes');
-	invGroupsArr = await fetchParse('invGroups');
-	mapOneToMany('dgmTypeAttributes', dgmTypeAttributesArr, 'invTypes', invTypesArr, 'typeID');
-	mapOneToMany('invTypes', invTypesArr, 'invGroups', invGroupsArr, 'groupID');
-}
 
 const invGroupsSkillCategoryID = 16;
 const dgmTypeAttributesPrimaryID = 180;
@@ -99,7 +40,7 @@ function levelToSP(level: string, modifier: number): number {
 	return Math.round(currentLevel - prevLevel);
 }
 
-function calculateSP(inputString: string): SPCalculatorResponseDTO {
+export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCalculatorResponseDTO {
 	let sum = 0;
 	const returnArray: Array<SkillData> = [];
 	inputString
@@ -109,7 +50,7 @@ function calculateSP(inputString: string): SPCalculatorResponseDTO {
 			name: str.substring(0, str.length - 2),
 			level: Number(str.substring(str.length - 1)).toFixed(0)
 		}))
-		.forEach((x,idx) => {
+		.forEach((x, idx) => {
 			try {
 				const iT = invTypesArr.find(
 					(iT) =>
@@ -146,7 +87,7 @@ function calculateSP(inputString: string): SPCalculatorResponseDTO {
 						level: x.level,
 						primary: null,
 						secondary: null,
-						sp: null,
+						sp: null
 					});
 				}
 			} catch (e) {
@@ -158,31 +99,9 @@ function calculateSP(inputString: string): SPCalculatorResponseDTO {
 					level: x.level,
 					primary: null,
 					secondary: null,
-					sp: null,
+					sp: null
 				});
 			}
 		});
 	return { skills: returnArray, sum: sum };
 }
-
-self.onconnect = async (e) => {
-	if (!isInit)
-		try {
-			await init();
-			isInit = true;
-		} catch (e) {
-			isInit = false;
-			isError = true;
-		}
-	const port = e.ports[0];
-	port.onmessage = (msg) => {
-		const data: Msg = msg.data;
-		switch (data.type) {
-			case MsgType.SPCalculator:
-				port.postMessage({
-					type: MsgType.SPCalculator,
-					params: calculateSP(data.params as string)
-				});
-		}
-	};
-};
