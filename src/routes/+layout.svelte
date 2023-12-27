@@ -9,7 +9,9 @@
 </script>
 
 <svelte:head>
-	<link rel="manifest" href="/manifest.webmanifest" />
+	{#if pwaInfo}
+		<link rel="manifest" href="/manifest.webmanifest" />
+	{/if}
 	<meta name="theme-color" content="#00000" />
 </svelte:head>
 <header>
