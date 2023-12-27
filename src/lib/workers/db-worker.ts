@@ -171,9 +171,7 @@ self.onconnect = async (e) => {
 			await init();
 			isInit = true;
 		} catch (e) {
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			isInit = false;
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			isError = true;
 		}
 	const port = e.ports[0];
