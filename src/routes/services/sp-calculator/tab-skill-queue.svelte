@@ -25,10 +25,10 @@ Motion Prediction 4
 Controlled Bursts 3
 Controlled Bursts 4`;
 	export let worker: SharedWorker;
-	export let input: string;
+	import { input } from './store';
 
 	async function sendCalculateSP() {
-		const msg: Msg = { type: MsgType.SPCalculator, params: input };
+		const msg: Msg = { type: MsgType.SPCalculator, params: $input };
 		worker.port.postMessage(msg);
 	}
 </script>
@@ -36,7 +36,7 @@ Controlled Bursts 4`;
 <section class="flex" style="gap: 16px;">
 	<div class="flex vertical">
 		<h2 class="align-center">Skill queue go there</h2>
-		<textarea bind:value={input} on:change={sendCalculateSP} {placeholder} />
+		<textarea bind:value={$input} on:change={sendCalculateSP} {placeholder} />
 	</div>
 </section>
 
