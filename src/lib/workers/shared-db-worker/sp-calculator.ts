@@ -43,7 +43,6 @@ function levelToSP(level: string, modifier: number): number {
 
 export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCalculatorResponseDTO {
 	let sum = 0;
-	const returnArray: Array<SkillData> = [];
 	const inputStringMapped = inputString
 		.trimEnd()
 		.split('\n')
@@ -51,12 +50,11 @@ export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCal
 			name: str.substring(0, str.length - 2),
 			level: Number(str.substring(str.length - 1)).toFixed(0),
 		}));
-	const processSkill = (x: { name: string; level: string }, idx: number) => {
+	const mapSkill = (x: { name: string; level: string }, idx: number) => {
+		const skillForName = (iT: invTypes) =>
+			iT.invGroups?.categoryID === iGsSkillCategoryID && iT.typeName && iT.typeName === x.name;
 		try {
-			const iT = invTypesArr.find(
-				(iT) =>
-					iT.invGroups?.categoryID === iGsSkillCategoryID && iT.typeName && iT.typeName === x.name
-			);
+			const iT = invTypesArr.find(skillForName);
 			if (iT?.dgmTypeAttributes) {
 				const dTA = iT.dgmTypeAttributes;
 				const primary = dTA.find((x) => x.attributeID === dTAsPrimaryID)?.valueFloat;
@@ -64,7 +62,7 @@ export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCal
 				const modifier = dTA.find((x) => x.attributeID === dTAsModifierID)?.valueFloat;
 				const sp = modifier ? levelToSP(x.level, modifier) : 0;
 				sum += sp;
-				returnArray.push({
+				return {
 					order: idx,
 					id: iT.typeID,
 					name: iT.typeName,
@@ -72,13 +70,12 @@ export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCal
 					secondary: secondary,
 					sp: sp,
 					level: x.level,
-				});
-				return;
+				};
 			}
 		} catch (e) {
 			console.log(e);
 		}
-		returnArray.push({
+		return {
 			order: idx,
 			id: -1,
 			name: x.name,
@@ -86,8 +83,7 @@ export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCal
 			primary: null,
 			secondary: null,
 			sp: null,
-		});
+		};
 	};
-	inputStringMapped.forEach(processSkill);
-	return { skills: returnArray, sum: sum };
+	return { skills: inputStringMapped.map(mapSkill), sum: sum };
 }
