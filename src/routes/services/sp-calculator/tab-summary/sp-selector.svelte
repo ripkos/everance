@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { sp } from './store';
+	import { sp } from '../store';
 	let spText = $sp.toLocaleString();
 
 	const amounts = [

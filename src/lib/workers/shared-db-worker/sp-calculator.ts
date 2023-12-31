@@ -1,6 +1,6 @@
 import type { invTypes } from '$lib/model/model-types';
 
-export type SPCalculatorResponseDTO = {
+export type SPCalculatorResponse = {
 	skills: SkillData[];
 	sum: number;
 };
@@ -41,7 +41,7 @@ function levelToSP(level: string, modifier: number): number {
 	return Math.round(currentLevel - prevLevel);
 }
 
-export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCalculatorResponseDTO {
+export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCalculatorResponse {
 	let sum = 0;
 	const inputStringMapped = inputString
 		.trimEnd()

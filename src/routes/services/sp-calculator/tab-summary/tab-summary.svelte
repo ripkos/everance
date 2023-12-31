@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { SPCalculatorResponseDTO } from '$lib/workers/shared-db-worker/sp-calculator';
-
-	export let output: SPCalculatorResponseDTO | null;
+	import type { SPCalculatorResponse } from '$lib/workers/shared-db-worker/sp-calculator';
+	import { responses } from '$lib/workers/shared-db-worker/client';
+	import { MsgType } from '$lib/workers/shared-db-worker/server';
+	$: output =  $responses.get(MsgType.SPCalculator)?.params as SPCalculatorResponse
 </script>
 
 <section class="flex" style="gap: 16px;">
@@ -38,13 +39,13 @@
 									{skill.level}
 								</td>
 								<td>
-									{skill.sp}
+									{skill.sp?.toLocaleString()}
 								</td>
 								<td>
 									{skill.primary}
 								</td>
 								<td>
-									{skill.primary}
+									{skill.secondary}
 								</td>
 								<td> TODO </td>
 							</tr>
@@ -59,6 +60,16 @@
 </section>
 
 <style>
+	table {
+		border-collapse: collapse;
+	}
+	tr,
+	td,
+	th {
+		border-width: 1px;
+		border-color: aqua;
+		border-style: solid;
+	}
 	.align-center {
 		text-align: center;
 	}
@@ -68,9 +79,5 @@
 	}
 	.flex.vertical {
 		flex-direction: column;
-	}
-	textarea {
-		resize: none;
-		height: 100%;
 	}
 </style>

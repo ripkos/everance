@@ -2,13 +2,18 @@
 /// <reference lib="WebWorker" />
 import type { invTypes, dgmTypeAttributes, invGroups } from '$lib/model/model-types';
 import type { LooseObject } from '$lib/utils/helpers';
-import { calculateSP } from './sp-calculator';
+import { calculateSP, type SPCalculatorResponse } from './sp-calculator';
 //#endregion
 
 //#region type declarations
-export type Msg = {
+export type MsgRequest = {
 	type: MsgType;
-	params: unknown;
+	params: string;
+};
+
+export type MsgResponse = {
+	type: MsgType;
+	params: SPCalculatorResponse;
 };
 
 export enum MsgType {
@@ -80,7 +85,7 @@ self.onconnect = async (e) => {
 		}
 	const port = e.ports[0];
 	port.onmessage = (msg) => {
-		const data: Msg = msg.data;
+		const data: MsgRequest = msg.data;
 		switch (data.type) {
 			case MsgType.SPCalculator:
 				port.postMessage({

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MsgType, type Msg } from '$lib/workers/shared-db-worker/shared-db-worker';
+	import { MsgType, type MsgRequest } from '$lib/workers/shared-db-worker/server';
 
 	const placeholder = `Energy Grid Upgrades 5
 Electronics Upgrades 4
@@ -24,11 +24,11 @@ Motion Prediction 3
 Motion Prediction 4
 Controlled Bursts 3
 Controlled Bursts 4`;
-	export let worker: SharedWorker;
+	import { worker } from '$lib/workers/shared-db-worker/client';
 	import { input } from './store';
 
 	async function sendCalculateSP() {
-		const msg: Msg = { type: MsgType.SPCalculator, params: $input };
+		const msg: MsgRequest = { type: MsgType.SPCalculator, params: $input };
 		worker.port.postMessage(msg);
 	}
 </script>
