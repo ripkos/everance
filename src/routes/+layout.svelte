@@ -47,7 +47,7 @@
 				justify-content: center;
 				align-items: center;
 				min-height: 2.5rem;
-				
+
 				li {
 					a {
 						text-decoration: none;

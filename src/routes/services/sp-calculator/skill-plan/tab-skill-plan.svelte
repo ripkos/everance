@@ -25,7 +25,7 @@ Motion Prediction 4
 Controlled Bursts 3
 Controlled Bursts 4`;
 	import { worker } from '$lib/workers/shared-db-worker/client';
-	import { input } from './store';
+	import { input } from '../store';
 
 	async function sendCalculateSP() {
 		const msg: MsgRequest = { type: MsgType.SPCalculator, params: $input };

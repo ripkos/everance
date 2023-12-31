@@ -1,12 +1,19 @@
 <script lang="ts">
-	import SpSelector from './tab-summary/sp-selector.svelte';
-	import TabInstruction from './tab-instruction.svelte';
-	import TabSkillQueue from './tab-skill-queue.svelte';
+	import type { Tab } from '$lib/components/tabs/tabs';
+	import Tabs from '$lib/components/tabs/tabs.svelte';
+	import TabsSelector from '../../../lib/components/tabs/tabs-selector.svelte';
+	import TabInstruction from './instruction/tab-instruction.svelte';
+	import TabSkillPlan from './skill-plan/tab-skill-plan.svelte';
 	import TabSummary from './tab-summary/tab-summary.svelte';
 	import { SPTabs } from './tabs';
-	import TabsSelector from './tabs-selector.svelte';
 
 	let currentTab = SPTabs.SkillQueue;
+
+	const tabs: Tab<SPTabs>[] = [
+		{ component: TabInstruction, value: SPTabs.Instruction, name: 'Instruction' },
+		{ component: TabSkillPlan, value: SPTabs.SkillQueue, name: 'Skill plan' },
+		{ component: TabSummary, value: SPTabs.Summary, name: 'Summary' },
+	];
 </script>
 
 <svelte:head>
@@ -14,17 +21,8 @@
 </svelte:head>
 
 <article>
-	<SpSelector></SpSelector>
-	<TabsSelector bind:currentTab></TabsSelector>
-	{#if currentTab == SPTabs.Instruction}
-		<TabInstruction></TabInstruction>
-	{:else if currentTab == SPTabs.SkillQueue}
-		<TabSkillQueue></TabSkillQueue>
-	{:else if currentTab == SPTabs.Summary}
-		<TabSummary></TabSummary>
-	{:else}
-		You are not supposed to be there!
-	{/if}
+	<TabsSelector {tabs} bind:currentTab></TabsSelector>
+	<Tabs {tabs} {currentTab}></Tabs>
 </article>
 
 <style lang="scss">

@@ -2,9 +2,11 @@
 	import type { SPCalculatorResponse } from '$lib/workers/shared-db-worker/sp-calculator';
 	import { responses } from '$lib/workers/shared-db-worker/client';
 	import { MsgType } from '$lib/workers/shared-db-worker/server';
-	$: output =  $responses.get(MsgType.SPCalculator)?.params as SPCalculatorResponse
+	import SpSelector from './sp-selector.svelte';
+	$: output = $responses.get(MsgType.SPCalculator)?.params as SPCalculatorResponse;
 </script>
 
+<SpSelector></SpSelector>
 <section class="flex" style="gap: 16px;">
 	<div class="flex vertical">
 		{#if output}

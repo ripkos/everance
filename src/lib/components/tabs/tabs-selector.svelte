@@ -1,31 +1,24 @@
-<script lang="ts">
-	import { SPTabs } from './tabs';
+<script lang="ts" generics="T">
+	import type { Tab } from './tabs';
 
-	export let currentTab: SPTabs;
-	const tabs = [
-		{ tab: SPTabs.Instruction, name: 'Instruction' },
-		{ tab: SPTabs.SkillQueue, name: 'Skill queue' },
-		{ tab: SPTabs.Summary, name: 'Summary' },
-	];
-	function changeActiveTab(newTab: SPTabs) {
-		currentTab = newTab;
-	}
+	export let currentTab: T;
+	export let tabs: Tab<T>[];
 </script>
 
-<section class="tabs">
+<aside>
 	<div>
-		{#each tabs as { tab, name }}
-			<button class:active={tab == currentTab} on:click={() => changeActiveTab(tab)}>
+		{#each tabs as { value, name }}
+			<button class:active={value == currentTab} on:click={() => (currentTab = value)}>
 				{name}
 			</button>
 		{/each}
 	</div>
-</section>
+</aside>
 
 <style lang="scss">
 	$--active: rgb(22, 197, 197);
 	$--hover: rgb(17, 113, 113);
-	section {
+	aside {
 		display: block;
 		text-align: center;
 		padding-bottom: 1.5rem;
