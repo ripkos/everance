@@ -6,7 +6,7 @@
 		{ value: 0, label: '0-5m' },
 		{ value: 5000000, label: '5m-50m (20% penalty)' },
 		{ value: 50000000, label: '50m-80m (40% penalty)' },
-		{ value: 80000000, label: '80m+ (70% penalty)' }
+		{ value: 80000000, label: '80m+ (70% penalty)' },
 	];
 
 	function convertTextToSP() {

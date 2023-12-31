@@ -27,7 +27,7 @@ const powers: Map<string, number> = new Map<string, number>([
 	['2', sqrt32],
 	['3', 32],
 	['4', 32 * sqrt32],
-	['5', 1024]
+	['5', 1024],
 ]);
 function levelToSP(level: string, modifier: number): number {
 	const currentLevelPower = powers.get(level);
@@ -49,7 +49,7 @@ export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCal
 		.split('\n')
 		.map((str) => ({
 			name: str.substring(0, str.length - 2),
-			level: Number(str.substring(str.length - 1)).toFixed(0)
+			level: Number(str.substring(str.length - 1)).toFixed(0),
 		}));
 	const processSkill = (x: { name: string; level: string }, idx: number) => {
 		try {
@@ -71,7 +71,7 @@ export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCal
 					primary: primary,
 					secondary: secondary,
 					sp: sp,
-					level: x.level
+					level: x.level,
 				});
 				return;
 			}
@@ -85,7 +85,7 @@ export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCal
 			level: x.level,
 			primary: null,
 			secondary: null,
-			sp: null
+			sp: null,
 		});
 	};
 	inputStringMapped.forEach(processSkill);

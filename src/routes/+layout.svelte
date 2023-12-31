@@ -4,7 +4,7 @@
 	import bg from '$lib/assets/bg.webp';
 	const links = [
 		{ link: '/', name: 'Home' },
-		{ link: '/services/sp-calculator', name: 'SP calculator' }
+		{ link: '/services/sp-calculator', name: 'SP calculator' },
 	];
 </script>
 

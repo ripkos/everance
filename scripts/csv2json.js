@@ -8,14 +8,14 @@ Object.defineProperty(String.prototype, 'toNumberOrNull', {
 		return this ? Number(this) : null;
 	},
 	writable: true,
-	configurable: true
+	configurable: true,
 });
 Object.defineProperty(String.prototype, 'toBoolean', {
 	value: function toBoolean() {
 		return this && this === '1';
 	},
 	writable: true,
-	configurable: true
+	configurable: true,
 });
 
 /**
@@ -52,9 +52,9 @@ const invTypes = {
 			marketGroupID: v.marketGroupID?.toNumberOrNull(),
 			iconID: v.iconID?.toNumberOrNull(),
 			soundID: v.soundID?.toNumberOrNull(),
-			graphicID: v.graphicID?.toNumberOrNull()
+			graphicID: v.graphicID?.toNumberOrNull(),
 		};
-	}
+	},
 };
 
 /**
@@ -73,9 +73,9 @@ const dgmTypeAttributes = {
 			typeID: Number(v.typeID), //pk
 			attributeID: Number(v.attributeID), //pk
 			valueInt: v.valueInt?.toNumberOrNull(),
-			valueFloat: v.valueFloat?.toNumberOrNull()
+			valueFloat: v.valueFloat?.toNumberOrNull(),
 		};
-	}
+	},
 };
 
 /**
@@ -99,9 +99,9 @@ const invGroups = {
 			anchored: v.anchored?.toBoolean(),
 			anchorable: v.anchorable?.toBoolean(),
 			fittableNonSingleton: v.fittableNonSingleton?.toBoolean(),
-			published: v.published?.toBoolean()
+			published: v.published?.toBoolean(),
 		};
-	}
+	},
 };
 
 /** @type {Array<ParsingType>} */

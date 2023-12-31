@@ -5,7 +5,7 @@
 	const tabs = [
 		{ tab: SPTabs.Instruction, name: 'Instruction' },
 		{ tab: SPTabs.SkillQueue, name: 'Skill queue' },
-		{ tab: SPTabs.Summary, name: 'Summary' }
+		{ tab: SPTabs.Summary, name: 'Summary' },
 	];
 	function changeActiveTab(newTab: SPTabs) {
 		currentTab = newTab;

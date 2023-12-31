@@ -9,7 +9,7 @@ export default defineConfig({
 		commonjs(),
 		SvelteKitPWA({
 			devOptions: {
-				enabled: true
+				enabled: true,
 			},
 			includeAssets: [`${iconsPath}favicon.ico'`, `${iconsPath}apple-touch-icon.webp`],
 			manifest: {
@@ -24,14 +24,14 @@ export default defineConfig({
 						src: `${iconsPath}android-chrome-192x192.webp`,
 						sizes: '192x192',
 						type: 'image/webp',
-						purpose: 'maskable'
+						purpose: 'maskable',
 					},
 					{
 						src: `${iconsPath}android-chrome-512x512.webp`,
 						sizes: '512x512',
-						type: 'image/webp'
-					}
-				]
+						type: 'image/webp',
+					},
+				],
 			},
 			workbox: {
 				runtimeCaching: [
@@ -40,12 +40,12 @@ export default defineConfig({
 						urlPattern: /^https:\/\/eve\.rance\.club/,
 						options: {
 							cacheableResponse: {
-								statuses: [200]
-							}
-						}
-					}
-				]
-			}
-		})
-	]
+								statuses: [200],
+							},
+						},
+					},
+				],
+			},
+		}),
+	],
 });

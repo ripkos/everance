@@ -12,7 +12,7 @@ export type Msg = {
 };
 
 export enum MsgType {
-	SPCalculator
+	SPCalculator,
 }
 //#endregion
 
@@ -85,7 +85,7 @@ self.onconnect = async (e) => {
 			case MsgType.SPCalculator:
 				port.postMessage({
 					type: MsgType.SPCalculator,
-					params: calculateSP(data.params as string, invTypesArr)
+					params: calculateSP(data.params as string, invTypesArr),
 				});
 		}
 	};
