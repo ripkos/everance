@@ -1,7 +1,6 @@
 //#region imports
 /// <reference lib="WebWorker" />
 import type { invTypes, dgmTypeAttributes, invGroups } from '$lib/model/model-types';
-import type { LooseObject } from '$lib/utils/helpers';
 import { calculateSP, type SPCalculatorResponse } from './sp-calculator';
 //#endregion
 
@@ -22,28 +21,22 @@ export enum MsgType {
 //#endregion
 
 //#region helper functions
-function mapOneToMany<K, One extends LooseObject, Many extends LooseObject>(
-	oneNavigationProperty: string,
+function mapOneToMany<Key, One, Many>(
 	oneArray: One[],
-	manyNavigationProperty: string,
 	manyArray: Many[],
-	manyPK: string
+	oneKeyGetter: (o: One) => Key,
+	manyKeyGetter: (m: Many) => Key,
+	oneToManyRelationshipSetter: (o: One, m: Many) => void
 ) {
-	const manyMap = new Map<K, Many>();
+	const manyMap = new Map<Key, Many>();
 	manyArray.forEach((many) => {
-		manyMap.set(many[manyPK] as K, many);
+		manyMap.set(manyKeyGetter(many), many);
 	});
-	oneArray.forEach((oneObj) => {
-		const key = oneObj[manyPK] as K;
-		const manyObj = manyMap.get(key);
-		if (manyObj) {
-			let arr: Array<One> | null | undefined = manyObj[oneNavigationProperty] as Array<One>;
-			if (!arr) {
-				arr = [];
-			}
-			arr.push(oneObj);
-			(manyObj as LooseObject)[oneNavigationProperty] = arr;
-			(oneObj as LooseObject)[manyNavigationProperty] = manyObj;
+	oneArray.forEach((one) => {
+		const key = oneKeyGetter(one);
+		const many = manyMap.get(key);
+		if (many) {
+			oneToManyRelationshipSetter(one, many);
 		}
 	});
 }
@@ -70,8 +63,28 @@ async function init() {
 	invTypesArr = await fetchParse('invTypes');
 	dgmTypeAttributesArr = await fetchParse('dgmTypeAttributes');
 	invGroupsArr = await fetchParse('invGroups');
-	mapOneToMany('dgmTypeAttributes', dgmTypeAttributesArr, 'invTypes', invTypesArr, 'typeID');
-	mapOneToMany('invTypes', invTypesArr, 'invGroups', invGroupsArr, 'groupID');
+	mapOneToMany(
+		dgmTypeAttributesArr,
+		invTypesArr,
+		(dTA) => dTA.typeID,
+		(iT) => iT.typeID,
+		(dTA, iT) => {
+			dTA.invTypes = iT;
+			if (iT.dgmTypeAttributes) iT.dgmTypeAttributes.push(dTA);
+			else iT.dgmTypeAttributes = [dTA];
+		}
+	);
+	mapOneToMany(
+		invTypesArr,
+		invGroupsArr,
+		(iT) => iT.groupID,
+		(iG) => iG.groupID,
+		(iT, iG) => {
+			iT.invGroups = iG;
+			if (iG.invTypes) iG.invTypes.push(iT);
+			else iG.invTypes = [iT];
+		}
+	);
 }
 declare const self: SharedWorkerGlobalScope;
 self.onconnect = async (e) => {
