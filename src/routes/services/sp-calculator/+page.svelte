@@ -7,7 +7,8 @@
 	import TabSummary from './tab-summary/tab-summary.svelte';
 	import { SPTabs } from './tabs';
 
-	let currentTab = SPTabs.SkillQueue;
+	import { currentTabStore } from './tabs';
+
 
 	const tabs: Tab<SPTabs>[] = [
 		{ component: TabInstruction, value: SPTabs.Instruction, name: 'Instruction' },
@@ -21,8 +22,8 @@
 </svelte:head>
 
 <article>
-	<TabsSelector {tabs} bind:currentTab></TabsSelector>
-	<Tabs {tabs} {currentTab}></Tabs>
+	<TabsSelector {tabs} bind:currentTab={$currentTabStore}></TabsSelector>
+	<Tabs {tabs} currentTab={$currentTabStore}></Tabs>
 </article>
 
 <style lang="scss">
