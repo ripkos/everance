@@ -8,11 +8,11 @@ export type SPCalculatorResponse = {
 export type SkillData = {
 	order: number;
 	id: number;
-	name: string | null | undefined;
-	primary: number | null | undefined;
-	secondary: number | null | undefined;
-	sp: number | null | undefined;
-	level: string | null | undefined;
+	name: string | null;
+	primary: number | null;
+	secondary: number | null;
+	sp: number | null;
+	level: string | null;
 };
 
 const iGsSkillCategoryID = 16;
@@ -50,16 +50,17 @@ export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCal
 			name: str.substring(0, str.length - 2),
 			level: Number(str.substring(str.length - 1)).toFixed(0),
 		}));
+	const invTypesArrFiltered = invTypesArr.filter(
+		(iT: invTypes) => iT.invGroups?.categoryID === iGsSkillCategoryID
+	);
 	const mapSkill = (x: { name: string; level: string }, idx: number) => {
-		const skillForName = (iT: invTypes) =>
-			iT.invGroups?.categoryID === iGsSkillCategoryID && iT.typeName && iT.typeName === x.name;
 		try {
-			const iT = invTypesArr.find(skillForName);
+			const iT = invTypesArrFiltered.find((iT) => iT.typeName === x.name);
 			if (iT?.dgmTypeAttributes) {
 				const dTA = iT.dgmTypeAttributes;
-				const primary = dTA.find((x) => x.attributeID === dTAsPrimaryID)?.valueFloat;
-				const secondary = dTA.find((x) => x.attributeID === dTAsSecondaryID)?.valueFloat;
-				const modifier = dTA.find((x) => x.attributeID === dTAsModifierID)?.valueFloat;
+				const primary = dTA.find((x) => x.attributeID === dTAsPrimaryID)?.valueFloat ?? null;
+				const secondary = dTA.find((x) => x.attributeID === dTAsSecondaryID)?.valueFloat ?? null;
+				const modifier = dTA.find((x) => x.attributeID === dTAsModifierID)?.valueFloat ?? null;
 				const sp = modifier ? levelToSP(x.level, modifier) : 0;
 				sum += sp;
 				return {
@@ -73,7 +74,8 @@ export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCal
 				};
 			}
 		} catch (e) {
-			console.log(e);
+			// TODO If Debug Mode
+			//console.log(e);
 		}
 		return {
 			order: idx,
