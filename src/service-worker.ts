@@ -1,6 +1,6 @@
 /// <reference types="@sveltejs/kit" />
 import { build, files, version } from '$service-worker';
-
+declare const self:ServiceWorkerGlobalScope;
 // Create a unique cache name for this deployment
 const CACHE = `cache-${version}`;
 
