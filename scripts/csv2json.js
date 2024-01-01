@@ -36,9 +36,9 @@ Object.defineProperty(String.prototype, 'toBoolean', {
 const invTypes = {
 	name: 'invTypes',
 	/** @type {(v: invTypesImport) => invTypes} */
-	mapper: (v, _, __) => {
+	mapper: (v) => {
 		return {
-			typeID: Number(v.typeID),
+			typeID: Number(v.typeID), //pk
 			groupID: v.groupID?.toNumberOrNull(),
 			typeName: v.typeName ?? null,
 			description: v.description ?? null,
@@ -53,6 +53,8 @@ const invTypes = {
 			iconID: v.iconID?.toNumberOrNull(),
 			soundID: v.soundID?.toNumberOrNull(),
 			graphicID: v.graphicID?.toNumberOrNull(),
+			dgmTypeAttributes: null, // nav
+			invGroups: null, //nav
 		};
 	},
 };
@@ -68,12 +70,13 @@ const invTypes = {
 const dgmTypeAttributes = {
 	name: 'dgmTypeAttributes',
 	/** @type {(v: dgmTypeAttributesImport) => dgmTypeAttributes} */
-	mapper: (v, _, __) => {
+	mapper: (v) => {
 		return {
-			typeID: Number(v.typeID), //pk
+			typeID: Number(v.typeID), //fk
 			attributeID: Number(v.attributeID), //pk
 			valueInt: v.valueInt?.toNumberOrNull(),
 			valueFloat: v.valueFloat?.toNumberOrNull(),
+			invTypes: null, //nav
 		};
 	},
 };
@@ -89,7 +92,7 @@ const dgmTypeAttributes = {
 const invGroups = {
 	name: 'invGroups',
 	/** @type {(v: invGroupsImport) => invGroups} */
-	mapper: (v, _, __) => {
+	mapper: (v) => {
 		return {
 			groupID: Number(v.groupID), // pk
 			categoryID: v.categoryID?.toNumberOrNull(),
@@ -100,6 +103,7 @@ const invGroups = {
 			anchorable: v.anchorable?.toBoolean(),
 			fittableNonSingleton: v.fittableNonSingleton?.toBoolean(),
 			published: v.published?.toBoolean(),
+			invTypes: null, // nav
 		};
 	},
 };
