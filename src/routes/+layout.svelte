@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { pwaInfo } from 'virtual:pwa-info';
+	import './fonts.css';
 	import './global.css';
-	import bg from '$lib/assets/bg.webp';
 	const links = [
 		{ link: '/', name: 'Home' },
 		{ link: '/services/sp-calculator', name: 'SP calculator' },
@@ -25,7 +25,7 @@
 		</ul>
 	</nav>
 </header>
-<main style="--bg: url({bg});">
+<main>
 	<slot />
 </main>
 <footer>
@@ -37,6 +37,9 @@
 		color: white;
 	}
 	header {
+		position: sticky;
+		top: 0;
+		z-index: 2;
 		background: linear-gradient(180deg, rgb(36, 36, 42) 0%, rgb(16, 16, 24) 97%, rgb(0, 0, 0) 100%);
 		nav {
 			ul {
@@ -62,7 +65,6 @@
 	main {
 		flex-grow: 1;
 		display: flex;
-		background-image: var(--bg);
 	}
 
 	footer {
