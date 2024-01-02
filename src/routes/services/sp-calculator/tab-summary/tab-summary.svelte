@@ -155,8 +155,8 @@
 	table {
 		border-collapse: collapse;
 		width: 100%;
-		display: block;
 		@media screen and (max-width: $--mobile-width) {
+			display: block;
 			overflow: auto;
 		}
 	}
