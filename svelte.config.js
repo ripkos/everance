@@ -15,8 +15,8 @@ const config = {
 			fallback: '404.html',
 		}),
 		version: {
-			name: child_process.execSync('git rev-parse HEAD').toString().trim()
-		}
+			name: child_process.execSync('git rev-parse HEAD').toString().trim(),
+		},
 	},
 };
 

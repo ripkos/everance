@@ -9,7 +9,6 @@
 
 	import { currentTabStore } from './tabs';
 
-
 	const tabs: Tab<SPTabs>[] = [
 		{ component: TabInstruction, value: SPTabs.Instruction, name: 'Instruction' },
 		{ component: TabSkillPlan, value: SPTabs.SkillQueue, name: 'Skill plan' },
