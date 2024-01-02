@@ -8,11 +8,11 @@ export type SPCalculatorResponse = {
 export type SkillData = {
 	order: number;
 	id: number;
-	name: string | null;
-	primary: number | null;
-	secondary: number | null;
-	sp: number | null;
-	level: string | null;
+	name: string;
+	primary: number;
+	secondary: number;
+	sp: number;
+	level: string;
 };
 
 const iGsSkillCategoryID = 16;
@@ -30,9 +30,9 @@ const powers: Map<string, number> = new Map<string, number>([
 	['5', 1024],
 ]);
 function levelToSP(level: string, modifier: number): number {
-	const currentLevelPower = powers.get(level);
-	const prevLevelPower = powers.get((Number(level) - 1).toFixed(0));
-	if (!prevLevelPower || !currentLevelPower) {
+	const currentLevelPower = powers.get(level) ?? NaN;
+	const prevLevelPower = powers.get(`${parseInt(level)-1}`) ?? NaN;
+	if (isNaN(currentLevelPower) || isNaN(prevLevelPower)) {
 		throw new Error('Only supports levels 1-5!');
 	}
 	const baseWithModifier = 250 * modifier;
@@ -58,15 +58,15 @@ export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCal
 			const iT = invTypesArrFiltered.find((iT) => iT.typeName === x.name);
 			if (iT?.dgmTypeAttributes) {
 				const dTA = iT.dgmTypeAttributes;
-				const primary = dTA.find((x) => x.attributeID === dTAsPrimaryID)?.valueFloat ?? null;
-				const secondary = dTA.find((x) => x.attributeID === dTAsSecondaryID)?.valueFloat ?? null;
-				const modifier = dTA.find((x) => x.attributeID === dTAsModifierID)?.valueFloat ?? null;
-				const sp = modifier ? levelToSP(x.level, modifier) : 0;
+				const primary = dTA.find((x) => x.attributeID === dTAsPrimaryID)?.valueFloat ?? NaN;
+				const secondary = dTA.find((x) => x.attributeID === dTAsSecondaryID)?.valueFloat ?? NaN;
+				const modifier = dTA.find((x) => x.attributeID === dTAsModifierID)?.valueFloat ?? NaN;
+				const sp = modifier ? levelToSP(x.level, modifier) : NaN;
 				sum += sp;
 				return {
 					order: idx,
 					id: iT.typeID,
-					name: iT.typeName,
+					name: x.name,
 					primary: primary,
 					secondary: secondary,
 					sp: sp,
@@ -79,12 +79,12 @@ export function calculateSP(inputString: string, invTypesArr: invTypes[]): SPCal
 		}
 		return {
 			order: idx,
-			id: -1,
+			id: NaN,
 			name: x.name,
 			level: x.level,
-			primary: null,
-			secondary: null,
-			sp: null,
+			primary: NaN,
+			secondary: NaN,
+			sp: NaN,
 		};
 	};
 	return { skills: inputStringMapped.map(mapSkill), sum: sum };
