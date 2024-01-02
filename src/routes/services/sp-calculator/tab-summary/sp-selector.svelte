@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { sp } from '../store';
 	let spText = $sp.toLocaleString();
+	export let className = '';
 
 	const amounts = [
 		{ value: 0, label: '0-5m' },
@@ -22,8 +23,8 @@
 	}
 </script>
 
-<section>
-	<h2>SP Amount:</h2>
+<aside class="island {className}">
+	<h2>SP Amount</h2>
 	{#each amounts as amount}
 		<button
 			on:click={() => {
@@ -40,4 +41,11 @@
 		}}
 		placeholder="0"
 	/>
-</section>
+</aside>
+
+<style lang="scss">
+	@import './shared.scss';
+	button {
+		display: block;
+	}
+</style>

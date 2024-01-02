@@ -31,7 +31,7 @@ const powers: Map<string, number> = new Map<string, number>([
 ]);
 function levelToSP(level: string, modifier: number): number {
 	const currentLevelPower = powers.get(level) ?? NaN;
-	const prevLevelPower = powers.get(`${parseInt(level)-1}`) ?? NaN;
+	const prevLevelPower = powers.get(`${parseInt(level) - 1}`) ?? NaN;
 	if (isNaN(currentLevelPower) || isNaN(prevLevelPower)) {
 		throw new Error('Only supports levels 1-5!');
 	}

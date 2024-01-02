@@ -1,0 +1,65 @@
+$--intelligence: rgb(96, 96, 247);
+$--perception: rgb(23, 231, 231);
+$--charisma: rgb(24, 197, 24);
+$--willpower: rgb(230, 23, 23);
+$--memory: rgb(27, 27, 220);
+.intelligence {
+	color: $--intelligence;
+}
+.perception {
+	color: $--perception;
+}
+.charisma {
+	color: $--charisma;
+}
+.willpower {
+	color: $--willpower;
+}
+.memory {
+	color: $--memory;
+}
+
+$--opacity-firefox: 0.96;
+$--opacity-other: 0.4;
+@mixin bgc($color) {
+	@supports not (-moz-appearance: button) {
+		background: rgba($color, $--opacity-other);
+	}
+	@supports (-moz-appearance: button) {
+		background: rgba($color, $--opacity-firefox);
+	}
+}
+.island {
+	@include bgc(rgb(0, 0, 0));
+	border-width: 0.05rem;
+	border-radius: 1rem;
+	border-color: rgb(240, 255, 255);
+	padding: 0.75rem;
+	border-style: solid;
+	@supports not (-moz-appearance: button) {
+		backdrop-filter: blur(15px);
+	}
+	h2 {
+		width: max-content;
+		padding: 0.35rem;
+		border-width: 0 0 0.05rem 0.05rem;
+		border-bottom-left-radius: 0.75rem;
+		border-color: rgb(240, 255, 255);
+		border-style: solid;
+		float: right;
+		font-size: large;
+	}
+	&.summary,
+	&.suggested,
+	&.attr {
+		@include bgc(rgb(9, 9, 116));
+	}
+	&.skills {
+		@include bgc(rgb(8, 91, 48));
+	}
+
+	&.sp,
+	&.remap {
+		@include bgc(rgb(74, 33, 5));
+	}
+}
