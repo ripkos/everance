@@ -49,7 +49,7 @@ $--opacity-other: 0.4;
 		float: right;
 		font-size: large;
 	}
-	&.summary,
+	//&.summary,
 	&.suggested,
 	&.attr {
 		@include bgc(rgb(9, 9, 116));

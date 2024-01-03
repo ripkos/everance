@@ -107,11 +107,12 @@
 		display: grid;
 		grid-gap: 1rem;
 		grid-template-areas:
-			'summary x sp'
-			'attr suggested remap'
+			'attr summary sp'
+			'suggested summary remap'
 			'skills skills skills';
 		grid-auto-columns: minmax(0, 1fr);
 		grid-template-rows: 1fr 1fr auto;
+		grid-template-columns: 1fr 1.05fr 1fr;
 		grid-auto-flow: column;
 		@media screen and (max-width: $--mobile-width) {
 			grid-gap: 0.33rem;
@@ -124,6 +125,7 @@
 				'skills';
 			grid-auto-flow: row;
 			grid-template-rows: 1fr;
+			grid-template-columns: auto;
 		}
 		.suggested {
 			grid-area: suggested;
